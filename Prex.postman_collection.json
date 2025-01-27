@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "ea735599-bd69-4f6f-a741-296c7796a914",
+		"name": "Prex",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8906118"
+	},
+	"item": [
+		{
+			"name": "new_client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"last_client_id\", jsonData.client_id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"client_name\":\"Marcos\",\n\"birth_date\":\"1980-06-14\",\n\"document_number\":\"235452344\",\n\"country\":\"AR\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/new_client",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"new_client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client_balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/client_balance/{{last_client_id}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"client_balance",
+						"{{last_client_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "store_balances",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/store_balances",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"store_balances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new_credit_transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"client_id\":{{last_client_id}},\n\"credit_amount\":1.25}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/new_credit_transaction",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"new_credit_transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new_debit_transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"client_id\":{{last_client_id}},\n\"debit_amount\":2}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/new_debit_transaction",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"new_debit_transaction"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "last_client_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "host",
+			"value": "127.0.0.1:8080",
+			"type": "default"
+		}
+	]
+}
