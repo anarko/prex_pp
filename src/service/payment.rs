@@ -43,6 +43,7 @@ impl PaymentService {
         } else if transaction.debit_amount.is_some() {
             -transaction.debit_amount.unwrap()
         } else {
+            // transaction without amount is not allowed
             return Err("Invalid transaction".to_string());
         };
 
@@ -62,6 +63,7 @@ impl PaymentService {
     ) -> Result<BalanceModel, String> {
         self.client_service.get_by_id(client_id.clone()).await?;
 
+        // get write lock
         let mut writable_balances: tokio::sync::RwLockWriteGuard<'_, Vec<BalanceModel>> =
             self.balances.write().await;
         let balance: Option<&mut BalanceModel> = writable_balances
@@ -121,6 +123,7 @@ impl PaymentService {
     }
 
     pub async fn reset_balances(&self) {
+        // get write lock
         let mut writable_balances: tokio::sync::RwLockWriteGuard<'_, Vec<BalanceModel>> =
             self.balances.write().await;
         for balance in writable_balances.iter_mut() {
