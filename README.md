@@ -6,4 +6,4 @@ Para correr el servidor :
 
 El sever de la api corre en http://localhost:8080 no requiere configuración inicial
 
-En el archivo Pres.postman_collection.json se encuentra una colección de postman para el testeo de la api
+En el archivo Prex.postman_collection.json se encuentra una colección de postman para el testeo de la api
